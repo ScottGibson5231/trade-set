@@ -13,9 +13,10 @@ public class JobService : IJobService
         _workerService = workerService;
     }
 
-    public async Task CreateJobAndNotifyWorkersAsync(Guid employerId, CreateJobRequest request)
+    public async Task<(bool success, Guid? jobId)> CreateJobAndNotifyWorkersAsync(Guid employerId, CreateJobRequest request)
     {
-
+        try
+        {
         var job = new Job()
         {
             Id = Guid.NewGuid(),
@@ -31,5 +32,12 @@ public class JobService : IJobService
 
         //Now that job is created, we need to trigger the notification
         await _workerService.NotifyWorkersAboutJobPostingAsync(job);
+
+        return (true, job.Id);
+        }
+        catch (Exception e)
+        {
+            return (false, null);
+        }
     }
 }

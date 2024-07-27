@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TradeSet.Core;
 
 
 namespace TradeSet.Api;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class JobController
 {
     private readonly IJobService _jobService;
@@ -20,10 +19,6 @@ public class JobController
 
     [HttpPost]
     [Route("job")]
-    [ProducesResponseType(200)]
-    [ProducesResponseType(400)]
-    [ProducesResponseType(500)]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> CreateJobAsync(CreateJobRequest request)
     {
         // TODO: check if employer exists (ID will come in from a token)
@@ -31,17 +26,13 @@ public class JobController
 
         // TODO: create job
         // TODO: Notify workers that job is posted
-        try{
-        var response = await _jobService.CreateJobAndNotifyWorkersAsync(request);
+        var response = await _jobService.CreateJobAndNotifyWorkersAsync(Guid.NewGuid() ,request);
 
-        if(response.Success){
-            return Ok(response);
-        }
-        return BadRequest(response.Message);
-        }
-        catch(Exception e)
+        if(response.success)
         {
-            return StatusCode(500);
+            return new OkObjectResult(response.jobId);
         }
+
+        return new BadRequestObjectResult("Unable to create job");
     }
 }

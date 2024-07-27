@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TradeSet.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6309486c16c8ce455c267d548e5a540e9ee4d1ae")]
 [assembly: System.Reflection.AssemblyProductAttribute("TradeSet.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TradeSet.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
