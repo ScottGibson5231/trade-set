@@ -26,12 +26,13 @@ public class JobController
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CreateJobAsync(CreateJobRequest request)
     {
-        //check if employer exists (ID will come in from a token)
+        // TODO: check if employer exists (ID will come in from a token)
         //_employerService.GetEmployerById(Id);
 
-        //create job
+        // TODO: create job
+        // TODO: Notify workers that job is posted
         try{
-        var response = await _jobService.CreateJobAsync(request);
+        var response = await _jobService.CreateJobAndNotifyWorkersAsync(request);
 
         if(response.Success){
             return Ok(response);
